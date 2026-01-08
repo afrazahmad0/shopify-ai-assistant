@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopify AI Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Shopify AI Assistant</h1>
+    <p class="subtitle">Smart product descriptions and customer support powered by AI</p>
+
+    <div class="card">
+        <h2>Customer Support Chatbot</h2>
+        <button id="loadHistoryBtn">Load Previous Chats</button>
+
+        <div id="chatBox" class="chat-box"></div>
+
+        <div class="input-row">
+            <input id="question" type="text" placeholder="Ask a customer question">
+            <button id="askBtn">Send</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Product Description Generator</h2>
+
+        <textarea id="productInfo" placeholder="Enter product details"></textarea>
+        <button id="genBtn">Generate Description</button>
+
+        <div id="descResult" class="result-box"></div>
+    </div>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

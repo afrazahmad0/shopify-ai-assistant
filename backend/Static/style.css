@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.chat-box {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    height: 240px;
+    padding: 12px;
+    overflow-y: auto;
+    background: #fafafa;
+    margin-bottom: 12px;
+}
+
+.chat-msg {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.user {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.assistant {
+    color: #1a73e8;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #1a73e8;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1558b0;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.result-box {
+    margin-top: 15px;
+    padding: 12px;
+    background: #f1f3f9;
+    border-radius: 6px;
+    min-height: 60px;
+}
