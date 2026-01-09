@@ -7,6 +7,7 @@ const chatBox = document.getElementById("chatBox");
 const productInfo = document.getElementById("productInfo");
 const descResult = document.getElementById("descResult");
 
+
 askBtn.addEventListener("click", askAssistant);
 genBtn.addEventListener("click", generateDescription);
 
