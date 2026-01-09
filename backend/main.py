@@ -2,22 +2,27 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from database import create_table, save_chat, get_chats
+from pathlib import Path
+
 from dotenv import load_dotenv
 from openai import OpenAI
 import requests
 import os
 
+from database import create_table, save_chat, get_chats
+
 load_dotenv()
 
 app = FastAPI()
 
+BASE_DIR = Path(__file__).resolve().parent
+
 create_table()
 
 app.mount(
-"/static",
-StaticFiles(directory="Static"),
-name="static"
+    "/static",
+    StaticFiles(directory=BASE_DIR / "Static"),
+    name="static"
 )
 
 app.add_middleware(
@@ -33,7 +38,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @app.get("/")
 def serve_frontend():
-    return FileResponse("static/index.html")
+    return FileResponse(BASE_DIR / "Static" / "index.html")
 
 
 @app.get("/test-shopify")
@@ -79,8 +84,6 @@ def get_clean_products():
     return {"products": clean_products}
 
 
-from database import get_chats
-
 @app.get("/assistant")
 def assistant(question: str):
     store_url = os.getenv("SHOPIFY_STORE_URL")
@@ -95,19 +98,19 @@ def assistant(question: str):
     product_text = ""
     for p in products:
         product_text += f"""
-        Product: {p.get('title')}
-        Price: {p.get('variants', [{}])[0].get('price')}
-        Description: {p.get('body_html')}
-        """
+Product: {p.get('title')}
+Price: {p.get('variants', [{}])[0].get('price')}
+Description: {p.get('body_html')}
+"""
 
     previous_chats = get_chats()
 
     chat_context = ""
     for q, a, _ in previous_chats:
         chat_context += f"""
-        User: {q}
-        Assistant: {a}
-        """
+User: {q}
+Assistant: {a}
+"""
 
     prompt = f"""
 You are a Shopify store assistant.
@@ -117,8 +120,6 @@ Store products:
 
 Previous conversation:
 {chat_context}
-
-Now answer the new question clearly.
 
 Customer question:
 {question}
@@ -155,16 +156,18 @@ Product info:
     save_chat(product_info, generated_text)
 
     return {"generated_text": generated_text}
-from database import get_chats
+
 
 @app.get("/chat-history")
 def chat_history():
     rows = get_chats()
     history = []
+
     for q, a, t in rows:
         history.append({
             "question": q,
             "answer": a,
             "time": t
         })
+
     return {"history": history}
