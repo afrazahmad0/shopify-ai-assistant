@@ -14,7 +14,11 @@ app = FastAPI()
 
 create_table()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount(
+"/static",
+StaticFiles(directory="Static"),
+name="static"
+)
 
 app.add_middleware(
     CORSMiddleware,
